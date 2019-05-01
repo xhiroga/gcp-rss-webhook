@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: hashicorp/terraform
+      - image: hiroga/terraform-gcp
     steps:
       - checkout
       - run:
@@ -12,7 +12,7 @@ jobs:
             terraform plan
   test:
     docker:
-      - image: hashicorp/terraform
+      - image: hiroga/terraform-gcp
     steps:
       - checkout
       - run: terraform fmt
