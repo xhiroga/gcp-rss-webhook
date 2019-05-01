@@ -5,13 +5,17 @@ jobs:
       - image: hashicorp/terraform
     steps:
       - checkout
-      - run: terraform --help
+      - run:
+          name: deploy
+          command: |
+            terraform init
+            terraform plan
   test:
     docker:
       - image: hashicorp/terraform
     steps:
       - checkout
-      - run: ls
+      - run: terraform fmt
 workflows:
   version: 2
   build_and_test:
