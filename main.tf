@@ -18,6 +18,6 @@ resource "google_pubsub_topic" "schedule_topic" {
   name = "schedule-topic"
 
   labels = {
-    repository = "https://github.com/hiroga-cc/gcp-rss-webhook"
+    repository = "github.com/hiroga-cc/gcp-rss-webhook"
   }
 }
