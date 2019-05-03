@@ -28,6 +28,8 @@ jobs:
       - run:
           name: deploy
           command: |
+            env
+            cat ./key.json
             export GOOGLE_APPLICATION_CREDENTIALS="./key.json"
             terraform init
             terraform apply
