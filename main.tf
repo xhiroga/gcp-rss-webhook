@@ -14,10 +14,7 @@ provider "google" {
   region      = "asia-northeast1"
 }
 
-resource "google_pubsub_topic" "schedule_topic" {
-  name = "schedule-topic"
-
-  labels = {
-    repository = "github.com/hiroga-cc/gcp-rss-webhook"
-  }
+resource "google_pubsub_topic" "scheduled-topic" {
+  name    = "scheduled-topic"
+  project = "${var.project_id}"
 }
