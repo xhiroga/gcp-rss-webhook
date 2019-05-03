@@ -28,8 +28,6 @@ jobs:
       - run:
           name: deploy
           command: |
-            env
-            cat ./key.json
             export GOOGLE_APPLICATION_CREDENTIALS="./key.json"
             terraform init
             terraform apply
@@ -37,5 +35,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - test
-      - build
+      - test:
+          context: cc-hiroga-gcp-rss-webhook
+      - build:
+          context: cc-hiroga-gcp-rss-webhook
