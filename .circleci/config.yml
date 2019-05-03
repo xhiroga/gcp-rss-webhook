@@ -6,13 +6,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: activate service account for access Cloud Storage
-          command: |
-            echo ${GCLOUD_SERVICE_KEY} | gcloud auth activate-service-account --key-file=-
-            gcloud --quiet config set project ${TF_VAR_project_id}
-            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_REGION}
-            gcloud config list
-      - run:
           name: create credential file for Terraform
           command: |
             echo ${GCLOUD_SERVICE_KEY} > ./key.json
@@ -28,13 +21,6 @@ jobs:
       - image: hiroga/terraform-gcp
     steps:
       - checkout
-      - run:
-          name: activate service account for access Cloud Storage
-          command: |
-            echo ${GCLOUD_SERVICE_KEY} | gcloud auth activate-service-account --key-file=-
-            gcloud --quiet config set project ${TF_VAR_project_id}
-            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_REGION}
-            gcloud config list
       - run:
           name: create credential file for Terraform
           command: |
