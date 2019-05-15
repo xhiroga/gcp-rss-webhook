@@ -136,12 +136,13 @@ const rssToDiscord = (post) => {
  * @param {Object} res Cloud Function response context.
  */
 exports.handler = async function handler(req, res) {
-    const now = Date.now()
-    console.log(`now: ${now}`)
+    const dt = Date.now()
+    dt.setHours(dt.getHours() - 3);
+    console.log(`published after: ${dt}`)
 
     const config = await getJson(bucketName, "rss_webhooks.json")
     await config.forEach(async subscription => {
-        const posts = await getLatestPosts(subscription.rss, now)
+        const posts = await getLatestPosts(subscription.rss, dt)
         fs.writeFileSync(`${subscription.label}.json`, JSON.stringify(posts));
         await posts.forEach(async post => {
             await requestPromise(subscription.webhook, rssToDiscord(post))
