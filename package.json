@@ -21,7 +21,8 @@
   "homepage": "https://github.com/hiroga-cc/gcp-rss-webhook#readme",
   "dependencies": {
     "@google-cloud/storage": "^2.5.0",
-    "axios": "^0.18.0"
+    "feedparser": "^2.2.9",
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "mocha": "^6.1.4"
