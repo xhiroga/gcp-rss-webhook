@@ -53,10 +53,7 @@ data "archive_file" "function_src" {
   type        = "zip"
   output_path = "function_src.zip"
 
-  source {
-    content  = "${file("src/index.js")}"
-    filename = "index.js"
-  }
+  source_dir = "src"
 }
 
 resource "google_storage_bucket_object" "archive" {

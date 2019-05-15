@@ -2,9 +2,15 @@ version: 2
 jobs:
   test:
     docker:
-      - image: hiroga/terraform-gcp
+      - image: hiroga/terraform-gcp-ts
     steps:
       - checkout
+      - run:
+          name: npm
+          command: |
+            npm install
+            mv ./node_modules ./src/node_modules
+            npm test
       - run:
           name: create credential file for Terraform
           command: |
@@ -18,9 +24,14 @@ jobs:
 
   build:
     docker:
-      - image: hiroga/terraform-gcp
+      - image: hiroga/terraform-gcp-ts
     steps:
       - checkout
+      - run:
+          name: npm
+          command: |
+            npm install --production
+            mv ./node_modules ./src/node_modules
       - run:
           name: create credential file for Terraform
           command: |

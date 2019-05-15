@@ -1,8 +1,15 @@
 # gcp-rss-webhook
 read rss and fire webhook ex discord. run on gcp
 
+# run
+```
+# for deploy with npm package, install to src dir.
+npm install
+npm test
+```
 
-# local
+
+# depoloy
 ## prerequisite
 1. get `key.json` by GCP Service Account
 2. set environment variables

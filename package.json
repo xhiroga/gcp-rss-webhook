@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "npx mocha"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/hiroga-cc/gcp-rss-webhook#readme",
   "dependencies": {
+    "axios": "^0.18.0"
+  },
+  "devDependencies": {
     "mocha": "^6.1.4"
   }
 }
