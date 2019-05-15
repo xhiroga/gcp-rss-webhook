@@ -30,7 +30,7 @@ jobs:
           command: |
             export GOOGLE_APPLICATION_CREDENTIALS="./key.json"
             terraform init
-            terraform apply -auto-approve
+            terraform apply -auto-approve -lock=false
 workflows:
   version: 2
   build_and_test:
