@@ -1,0 +1,25 @@
+{
+  "name": "gcp-rss-webhook",
+  "version": "1.0.0",
+  "description": "read rss and fire webhook ex discord. run on gcp",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hiroga-cc/gcp-rss-webhook.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hiroga-cc/gcp-rss-webhook/issues"
+  },
+  "homepage": "https://github.com/hiroga-cc/gcp-rss-webhook#readme",
+  "dependencies": {
+    "mocha": "^6.1.4"
+  }
+}

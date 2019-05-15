@@ -35,7 +35,7 @@ resource "google_cloud_scheduler_job" "job" {
 
 resource "google_cloudfunctions_function" "function" {
   name                = "rss-webhook-function"
-  entry_point         = "helloGET"
+  entry_point         = "handler"
   available_memory_mb = 256
   project             = "${var.project_id}"
   runtime             = "nodejs8"
