@@ -34,7 +34,7 @@ export TF_VAR_project_id="${PROJECT_ID}"
 export TF_VAR_bucket_name="${BUCKET_NAME}"
 export TF_LOG=DEBUG
 cp -r ./node_modules ./src/node_modules
-terraform apply -auto-approve
+terraform apply -auto-approve -lock=false
 ```
 
 ## circleci
