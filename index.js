@@ -100,20 +100,16 @@ function getParams(str) {
 }
 
 const requestPromise = async (webhook_url, json) => {
-    //ヘッダーを定義
-    const headers = {
-        'Content-Type': 'application/json'
-    }
-
-    //オプションを定義
     const options = {
         url: webhook_url,
         method: 'POST',
-        headers: headers,
-        json: json,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        json: json
     }
 
-    return new Promise((resole, reject) => {
+    return new Promise((resolve, reject) => {
         request(options, (err, res, body) => {
             if (body) {
                 resolve(body); return
@@ -136,14 +132,14 @@ const rssToDiscord = (post) => {
  * @param {Object} res Cloud Function response context.
  */
 exports.handler = async function handler(req, res) {
-    const dt = Date.now()
+    const dt = new Date()
     dt.setHours(dt.getHours() - 3);
     console.log(`published after: ${dt}`)
 
     const config = await getJson(bucketName, "rss_webhooks.json")
     await config.forEach(async subscription => {
-        const posts = await getLatestPosts(subscription.rss, dt)
-        fs.writeFileSync(`${subscription.label}.json`, JSON.stringify(posts));
+        const posts = await getLatestPosts(subscription.rss, dt.getTime())
+        // fs.writeFileSync(`.local/${subscription.label}.json`, JSON.stringify(posts));
         await posts.forEach(async post => {
             await requestPromise(subscription.webhook, rssToDiscord(post))
         })
