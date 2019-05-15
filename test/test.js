@@ -8,7 +8,7 @@ describe('idnex', function () {
                 body: {}
             }
             const res = {
-                send: (content) => { assert.ok(content) }
+                send: (content) => { console.log(content); assert.ok(content) }
             }
             index.handler(req, res)
         });

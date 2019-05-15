@@ -3,22 +3,24 @@ jobs:
   test:
     docker:
       - image: hiroga/terraform-gcp-ts
+    working_directory: ~/app
     steps:
       - checkout
+      - run:
+          name: create credential file for Terraform
+          command: |
+            echo ${GCLOUD_SERVICE_KEY} > ./src/key.json
       - run:
           name: npm
           command: |
             npm install
-            mv ./node_modules ./src/node_modules
-            npm test
-      - run:
-          name: create credential file for Terraform
-          command: |
-            echo ${GCLOUD_SERVICE_KEY} > ./key.json
+            export BUCKET_NAME=${TF_VAR_bucket_name}
+            npm test # npm test use mocha. the mocha bin should be in ./node_modules/..., not ./src/node_modules/...
       - run:
           name: test
           command: |
-            export GOOGLE_APPLICATION_CREDENTIALS="./key.json"
+            export GOOGLE_APPLICATION_CREDENTIALS="./src/key.json"
+            export TF_VAR_GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
             terraform init
             terraform plan
 
@@ -28,18 +30,19 @@ jobs:
     steps:
       - checkout
       - run:
+          name: create credential file for Terraform
+          command: |
+            echo ${GCLOUD_SERVICE_KEY} > ./src/key.json
+      - run:
           name: npm
           command: |
             npm install --production
-            mv ./node_modules ./src/node_modules
-      - run:
-          name: create credential file for Terraform
-          command: |
-            echo ${GCLOUD_SERVICE_KEY} > ./key.json
+            cp -r ./node_modules ./src/node_modules
       - run:
           name: deploy
           command: |
-            export GOOGLE_APPLICATION_CREDENTIALS="./key.json"
+            export GOOGLE_APPLICATION_CREDENTIALS="./src/key.json"
+            export TF_VAR_GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
             terraform init
             terraform apply -auto-approve -lock=false
 workflows:

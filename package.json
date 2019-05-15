@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "npx mocha"
+    "test": "GOOGLE_APPLICATION_CREDENTIALS=./src/key.json mocha"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/hiroga-cc/gcp-rss-webhook#readme",
   "dependencies": {
+    "@google-cloud/storage": "^2.5.0",
     "axios": "^0.18.0"
   },
   "devDependencies": {

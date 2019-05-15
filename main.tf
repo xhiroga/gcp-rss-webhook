@@ -5,6 +5,7 @@ terraform {
   }
 }
 
+variable "GOOGLE_APPLICATION_CREDENTIALS" {}
 variable "project_id" {}
 variable "bucket_name" {}
 
@@ -12,7 +13,7 @@ provider "archive" {}
 
 // Configure the Google Cloud provider
 provider "google" {
-  credentials = "${file("key.json")}"
+  credentials = "${var.GOOGLE_APPLICATION_CREDENTIALS}"
   project     = "${var.project_id}"
   region      = "asia-northeast1"
 }
@@ -40,13 +41,20 @@ resource "google_cloudfunctions_function" "function" {
   project             = "${var.project_id}"
   runtime             = "nodejs8"
 
+  environment_variables = {
+    GOOGLE_APPLICATION_CREDENTIALS = "${var.GOOGLE_APPLICATION_CREDENTIALS}"
+    BUCKET_NAME                    = "${var.bucket_name}"
+  }
+
   event_trigger {
     event_type = "google.pubsub.topic.publish"
     resource   = "${google_pubsub_topic.topic.name}"
   }
 
   source_archive_bucket = "${var.bucket_name}"
+
   source_archive_object = "${google_storage_bucket_object.archive.name}"
+  source_archive_object = "cc-hiroga-gcp-rss-webhook/function_src.zip"
 }
 
 data "archive_file" "function_src" {
