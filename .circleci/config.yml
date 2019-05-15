@@ -53,3 +53,5 @@ workflows:
           context: cc-hiroga-gcp-rss-webhook
       - build:
           context: cc-hiroga-gcp-rss-webhook
+          requires:
+            - test
