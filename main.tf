@@ -52,9 +52,7 @@ resource "google_cloudfunctions_function" "function" {
   }
 
   source_archive_bucket = "${var.bucket_name}"
-
   source_archive_object = "${google_storage_bucket_object.archive.name}"
-  source_archive_object = "cc-hiroga-gcp-rss-webhook/function_src.zip"
 }
 
 data "archive_file" "function_src" {
