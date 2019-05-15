@@ -25,7 +25,7 @@ resource "google_pubsub_topic" "topic" {
 resource "google_cloud_scheduler_job" "job" {
   name        = "rss-webhook-job"
   description = "rss webhook job"
-  schedule    = "0 */3 * * *"
+  schedule    = "0 */3 * * *"     # every 3 hours.
 
   pubsub_target {
     topic_name = "${google_pubsub_topic.topic.id}"
