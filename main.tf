@@ -59,7 +59,15 @@ data "archive_file" "function_src" {
   type        = "zip"
   output_path = "function_src.zip"
 
-  source_dir = "src"
+  source {
+    content  = "${file("index.js")}"
+    filename = "index.js"
+  }
+
+  source {
+    content  = "${file("package.json")}"
+    filename = "package.json"
+  }
 }
 
 resource "google_storage_bucket_object" "archive" {

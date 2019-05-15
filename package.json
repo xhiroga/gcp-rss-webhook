@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "GOOGLE_APPLICATION_CREDENTIALS=./src/key.json mocha"
+    "test": "GOOGLE_APPLICATION_CREDENTIALS=./key.json mocha"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,5 @@
 const assert = require('assert');
-const index = require("../src/index")
+const index = require("../index")
 
 describe('idnex', function () {
     describe('handler', function () {
