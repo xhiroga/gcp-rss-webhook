@@ -36,12 +36,12 @@ resource "google_cloud_scheduler_job" "job" {
 resource "google_cloudfunctions_function" "function" {
   name                = "rss-webhook-function"
   entry_point         = "helloGET"
-  available_memory_mb = 128
-  timeout             = 61
+  available_memory_mb = 256
   project             = "${var.project_id}"
+  runtime             = "nodejs8"
 
   event_trigger {
-    event_type = "providers/cloud.pubsub/eventTypes/topic.publish"
+    event_type = "google.pubsub.topic.publish"
     resource   = "${google_pubsub_topic.topic.name}"
   }
 
