@@ -42,8 +42,7 @@ resource "google_cloudfunctions_function" "function" {
   runtime             = "nodejs8"
 
   environment_variables = {
-    GOOGLE_APPLICATION_CREDENTIALS = "${var.GOOGLE_APPLICATION_CREDENTIALS}"
-    BUCKET_NAME                    = "${var.bucket_name}"
+    BUCKET_NAME = "${var.bucket_name}"
   }
 
   event_trigger {
