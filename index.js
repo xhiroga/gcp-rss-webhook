@@ -131,7 +131,7 @@ const rssToDiscord = (post) => {
  * @param {object} event The Cloud Functions event.
  * @param {function} callback The callback function.
  */
-exports.handler = async (event, callback) => {
+exports.handler = async (event) => {
     const dt = new Date()
     dt.setHours(dt.getHours() - 3);
     console.log(`published after: ${dt}`)
@@ -147,5 +147,5 @@ exports.handler = async (event, callback) => {
         })
     });
 
-    callback();
+    return
 };
