@@ -51,7 +51,7 @@ resource "google_cloudfunctions_function" "function" {
   }
 
   source_archive_bucket = "${var.bucket_name}"
-  source_archive_object = "${google_storage_bucket_object.archive.name}"
+  source_archive_object = "src/${data.archive_file.function_src.output_base64sha256}.zip"
 }
 
 data "archive_file" "function_src" {
@@ -70,7 +70,7 @@ data "archive_file" "function_src" {
 }
 
 resource "google_storage_bucket_object" "archive" {
-  name       = "function_src.zip"
+  name       = "src/${data.archive_file.function_src.output_base64sha256}.zip"
   bucket     = "${var.bucket_name}"
   source     = "function_src.zip"
   depends_on = ["data.archive_file.function_src"]
