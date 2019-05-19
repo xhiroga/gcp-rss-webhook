@@ -126,17 +126,19 @@ const rssToDiscord = (post) => {
 }
 
 /**
- * HTTP Cloud Function.
+ * Background Cloud Function to be triggered by Pub/Sub.
  *
- * @param {Object} req Cloud Function request context.
- * @param {Object} res Cloud Function response context.
+ * @param {object} event The Cloud Functions event.
+ * @param {function} callback The callback function.
  */
-exports.handler = async function handler(req, res) {
+exports.handler = async (event) => {
     const dt = new Date()
     dt.setHours(dt.getHours() - 3);
     console.log(`published after: ${dt}`)
 
     const config = await getJson(bucketName, "rss_webhooks.json")
+    console.log(`config: ${JSON.stringify(config)}`);
+
     await config.forEach(async subscription => {
         const posts = await getLatestPosts(subscription.rss, dt.getTime())
         // fs.writeFileSync(`.local/${subscription.label}.json`, JSON.stringify(posts));
@@ -145,5 +147,5 @@ exports.handler = async function handler(req, res) {
         })
     });
 
-    res.send(`config: ${JSON.stringify(config)}`);
+    return
 };
