@@ -1,32 +1,35 @@
 # gcp-rss-webhook
+
 read rss and fire webhook ex discord. run on gcp
 
-# setup
-```
+## setup
+
+```shell
 export BUCKET_NAME=${BUCKET_NAME}
 touch rss_webhooks.json
 bash mb.sh ${BUCKET_NAME}
 bash sync.sh ${BUCKET_NAME}
 ```
 
+## run
 
-# run
-```
+```shell
 # for deploy with npm package, install to src dir.
 export BUCKET_NAME=${BUCKET_NAME}
 npm install
 npm test
 ```
 
+## deploy
 
-# depoloy
-## prerequisite
+### prerequisite
+
 1. get `key.json` by GCP Service Account
 2. set environment variables
 
+### by hand
 
-## by hand
-```
+```shell
 export GOOGLE_APPLICATION_CREDENTIALS=./key.json
 export TF_VAR_GOOGLE_APPLICATION_CREDENTIALS=./key.json
 export TF_VAR_project_id="${PROJECT_ID}"
@@ -36,8 +39,9 @@ terraform plan -lock=false
 terraform apply -auto-approve -lock=false
 ```
 
-## circleci
-```
+### circleci
+
+```shell
 export GCLOUD_SERVICE_KEY=$(cat ./key.json)
 
 circleci config validate
