@@ -41,13 +41,14 @@ jobs:
             export TF_VAR_GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
             terraform init
             terraform apply -auto-approve -lock=false
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - test:
-          context: cc-hiroga-gcp-rss-webhook
-      - build:
-          context: cc-hiroga-gcp-rss-webhook
-          requires:
-            - test
+
+# workflows:
+#   version: 2
+#   build_and_test:
+#     jobs:
+#       - test:
+#           context: cc-hiroga-gcp-rss-webhook
+#       - build:
+#           context: cc-hiroga-gcp-rss-webhook
+#           requires:
+#             - test

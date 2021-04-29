@@ -32,8 +32,8 @@ npm test
 ```shell
 export GOOGLE_APPLICATION_CREDENTIALS=./key.json
 export TF_VAR_GOOGLE_APPLICATION_CREDENTIALS=./key.json
-export TF_VAR_project_id="${PROJECT_ID}"
-export TF_VAR_bucket_name="${BUCKET_NAME}"
+export TF_VAR_project_id="${PROJECT_ID:-rss-webhook}"
+export TF_VAR_bucket_name="${BUCKET_NAME:-cc-hiroga-gcp-rss-webhook}"
 # export TF_LOG=DEBUG
 terraform plan -lock=false
 terraform apply -auto-approve -lock=false
